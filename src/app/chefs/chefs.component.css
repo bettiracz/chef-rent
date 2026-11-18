@@ -1,0 +1,26 @@
+.chef-image {
+  height: 240px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card {
+  border-radius: 1rem;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.75rem 1.5rem rgb(0 0 0 / 10%) !important;
+}
+
+.badge {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.55em 0.85em;
+}
+
+.fees {
+  font-size: 0.95rem;
+}

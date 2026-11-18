@@ -1,0 +1,50 @@
+<section class="container py-5" id="szakacsok" aria-labelledby="chefs-heading">
+  <header class="text-center mb-5">
+    <p class="text-success fw-semibold text-uppercase small mb-2">ChefRent</p>
+    <h1 id="chefs-heading" class="display-6 fw-bold mb-3">Találd meg a tökéletes szakácsot!</h1>
+    <p class="text-secondary lead mb-0">Válassz a bérelhető szakácsok közül, és találd meg az alkalomhoz illőt.</p>
+  </header>
+
+  @if (loading()) {
+    <div class="text-center py-5" role="status" aria-live="polite">
+      <div class="spinner-border text-success mb-3" aria-hidden="true"></div>
+      <p class="text-secondary">Szakácsok betöltése...</p>
+    </div>
+  } @else if (error()) {
+    <div class="alert alert-danger text-center" role="alert">
+      Nem sikerült betölteni a szakácsokat. Kérlek, próbáld újra később!
+    </div>
+  } @else {
+    <div class="row g-4">
+      @for (chef of chefs(); track chef.id) {
+        <div class="col-12 col-md-6 col-lg-4">
+          <article class="card h-100 shadow-sm border-0 overflow-hidden">
+            <img class="card-img-top chef-image" [src]="chef.image" [alt]="chef.name + ' fényképe'" loading="lazy">
+            <div class="card-body d-flex flex-column p-4">
+              <h2 class="card-title h4 fw-bold mb-2">{{ chef.name }}</h2>
+              <p class="mb-3"><span class="badge rounded-pill text-bg-success">{{ chef.cuisine }}</span></p>
+              <p class="card-text text-secondary flex-grow-1">{{ chef.description }}</p>
+              <div class="fees border-top pt-3 mb-4">
+                <p class="d-flex justify-content-between gap-2 mb-2">
+                  <span class="text-secondary">Alapdíj</span>
+                  <strong>{{ chef.base_fee }} Ft</strong>
+                </p>
+                <p class="d-flex justify-content-between gap-2 mb-0">
+                  <span class="text-secondary">Napidíj</span>
+                  <strong>{{ chef.daily_rate }} Ft</strong>
+                </p>
+              </div>
+              <button type="button" class="btn btn-success mt-auto w-100 py-2 fw-semibold" (click)="berel(chef)">
+                + Bérel
+              </button>
+            </div>
+          </article>
+        </div>
+      } @empty {
+        <div class="col-12">
+          <p class="alert alert-info text-center">Jelenleg nincs bérelhető szakács.</p>
+        </div>
+      }
+    </div>
+  }
+</section>
